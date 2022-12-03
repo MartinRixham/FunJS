@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML 5 Boilerplate</title>
     <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.13.1/ace.min.js" integrity="sha512-U8J/s+8o7pOrcrcLbdTJckhlNCua8p8E2yJYiNPwrhYiwt6+l1K5MVpMGXXUjT5vgJRGFJOY9mGAHfFSC551VA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.13.1/mode-javascript.min.js" integrity="sha512-YTXoWGqn9pbJcdaqpRr6rWHjbSb8fohZFsgMuOlTwMGncpJ9Jij+1BwlAuUXokpusLYypwTpCz3b7hwVkoAjIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.13.1/theme-monokai.min.js" integrity="sha512-vH1p51CJtqdqWMpL32h5B9600achcN1XeTfd31hEcrCcCb5PCljIu7NQppgdNtdsayRQTnKmyf94s6HYiGQ9BA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
     <h1>Functional Programming in JavaScript</h1>
+    <div id="editor">function itIsAJS() {
+          return "yes";
+      }
+    </div>
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/monokai");
+      editor.session.setMode("ace/mode/javascript");
+      editor.setOptions({ maxLines: 50 });
+    </script>
   </body>
 </html>
