@@ -15,7 +15,12 @@ const IO = (run) => run
 
 IO.flatMap = (io, run) => run(io())
 
-IO.printResult = (result) =>
+const getData = () => Result.Success(1) //Result.Failure("Failed to get data.")
+const operate = (value) => Result.Success(value + 1)
+
+const runProgram = () => Result.flatMap(getData(), operate)
+
+const printResult = (result) =>
 	IO(() => {
 		if (result.success) {
 			console.log(result.value)
@@ -25,10 +30,4 @@ IO.printResult = (result) =>
 		}
 	})
 
-const getData = () => Result.Success(1) // Result.Failure("Failed to get data.")
-const add = (right) => (left) => Result.Success(left + right)
-const divideBy = (right) => (left) => Result.Success(left / right)
-
-const runProgram = () => Result.flatMap(Result.flatMap(getData(), add(2)), divideBy(2))
-
-IO.flatMap(IO(runProgram), IO.printResult)()
+IO.flatMap(IO(runProgram), printResult)()

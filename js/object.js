@@ -4,44 +4,84 @@ function getData() {
 	return 1;
 }
 
-function Operand() {
+function Value(number) {
+
+	this.plus = function(value) {
+
+		return value.sumOf(number);
+	};
+
+	this.divide = function(value) {
+
+		return value.quotientOf(number);
+	}
+
+	this.sumOf = function(other) {
+
+		return new Value(other + number); 
+	}
+
+	this.quotientOf = function(other) {
+
+		return new Value(other / number);
+	}
+
+	this.print = function() {
+
+		console.log(number);
+	}
+}
+
+function ValueError(error) {
+
+	this.plus = function() {
+
+		return this;
+	};
+
+	this.divide = function() {
+
+		return this;
+	}
+
+	this.sumOf = function() {
+
+		return this; 
+	}
+
+	this.quotienOf = function() {
+
+		return this;
+	}
+
+	this.print = function() {
+
+		console.error(error);
+	}
+}
+
+function Data() {
 
 	try {
 
 		let data = getData();
 
-		this.add = function(value) {
-
-			return {
-				success: true,
-				value: data + value
-			};
-		};
+		return new Value(data);
 	}
 	catch (error) {
 
-		this.add = function() {
-
-			return {
-				success: false,
-				message: error.message
-			};
-		};
+		return new ValueError(error.message);
 	}
 }
 
-function Operation(oparand) {
+function Addition(left, right) {
 
-	let sum = oparand.add(1);
-
-	if (sum.success) {
-
-		console.log(sum.value);
-	}
-	else {
-
-		console.error(sum.message);
-	}
+	return left.plus(right);
 }
 
-new Operation(new Operand());
+function Division(left, right) {
+
+	return left.divide(right);
+}
+
+new Division(new Addition(new Data(), new Value(2)), new Value(2)).print();
