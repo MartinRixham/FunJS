@@ -1,9 +1,9 @@
 const Result = {
-	Success: (value) => { return { success: true, value } },
-	Failure: (message) => { return { success: false, message } },
+	Success: (value) => { const fun = () => value; fun.success = true; return fun },
+	Failure: (message) => { const fun = () => message; fun.success = false; return fun },
 	flatMap: (result, run) => {
 		if (result.success) {
-			return run(result.value)
+			return run(result())
 		}
 		else {
 			return result
@@ -18,10 +18,10 @@ IO.flatMap = (io, run) => run(io())
 IO.printResult = (result) =>
 	IO(() => {
 		if (result.success) {
-			console.log(result.value)
+			console.log(result())
 		}
 		else {
-			console.error(result.message)
+			console.error(result())
 		}
 	})
 
