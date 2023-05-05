@@ -1,8 +1,3 @@
-fun getData(): Value
-{
-	return DoubleValue(1.0);
-}
-
 interface Value
 {
 	fun add(value: Value): Value;
@@ -58,11 +53,16 @@ class DoubleValue(val number: Double): Value
 
 	override fun print()
 	{
-		System.out.println(number);
+		println(number);
 	}
 }
 
-class Data(): Value by (try { getData(); } catch(e: Exception) { ErrorValue(e.message ?: "unknown faillure"); })
+fun getData(): Value
+{
+	return DoubleValue(1.0);
+}
+
+class Data(): Value by (try { getData(); } catch(e: Exception) { ErrorValue(e.message ?: "unknown failure"); })
 
 class Addition(left: Value, right: Value): Value by (left.add(right))
 
