@@ -7,7 +7,7 @@ interface Value
 	fun print();
 }
 
-class ErrorValue(val message: String): Value
+class ErrorValue(val message: String?): Value
 {
 	override fun add(value: Value): Value
 	{
@@ -57,12 +57,13 @@ class DoubleValue(val number: Double): Value
 	}
 }
 
-fun getData(): Value
+fun getData(): Double
 {
-	return DoubleValue(1.0);
+	// throw Exception("Failed to get data.");
+	return 1.0;
 }
 
-class Data(): Value by (try { getData(); } catch(e: Exception) { ErrorValue(e.message ?: "unknown failure"); })
+class Data(): Value by (try { DoubleValue(getData()); } catch(e: Exception) { ErrorValue(e.message); })
 
 class Addition(left: Value, right: Value): Value by (left.add(right))
 

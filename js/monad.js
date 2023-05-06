@@ -15,7 +15,7 @@ const IO = (run) => run
 
 IO.flatMap = (io, run) => run(io())
 
-IO.printResult = (result) =>
+const printResult = (result) =>
 	IO(() => {
 		if (result.success) {
 			console.log(result())
@@ -31,4 +31,4 @@ const divideBy = (right) => (left) => Result.Success(left / right)
 
 const runProgram = () => Result.flatMap(Result.flatMap(getData(), add(2)), divideBy(2))
 
-IO.flatMap(IO(runProgram), IO.printResult)()
+IO.flatMap(IO(runProgram), printResult)()

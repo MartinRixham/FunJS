@@ -1,12 +1,6 @@
-function getData() {
-
-	// throw Error("Failed to get data.");
-	return 1;
-}
-
 class Value {
 
-	#number
+	#number;
 
 	constructor(number) {
 
@@ -21,7 +15,7 @@ class Value {
 		}
 		else {
 
-			return this;
+			return value;
 		}
 	}
 
@@ -33,7 +27,7 @@ class Value {
 		}
 		else {
 
-			return this;
+			return value;
 		}
 	}
 
@@ -45,7 +39,7 @@ class Value {
 
 class ValueError {
 
-	#message
+	#message;
 
 	constructor(message) {
 
@@ -66,6 +60,12 @@ class ValueError {
 
 		console.error(this.#message);
 	}
+}
+
+function getData() {
+
+	// throw Error("Failed to get data.");
+	return 1;
 }
 
 function Data() {
