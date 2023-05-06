@@ -4,59 +4,67 @@ function getData() {
 	return 1;
 }
 
-function Value(number) {
+class Value {
 
-	this.plus = function(value) {
+	#number
 
-		return value.sumOf(number);
-	};
+	constructor(number) {
 
-	this.divide = function(value) {
-
-		return value.quotientOf(number);
+		this.#number = number;
 	}
 
-	this.sumOf = function(other) {
+	add(value) {
 
-		return new Value(other + number); 
+		if (value instanceof Value) {
+
+			return new Value(this.#number + value.#number);
+		}
+		else {
+
+			return this;
+		}
 	}
 
-	this.quotientOf = function(other) {
+	divide(value) {
 
-		return new Value(other / number);
+		if (value instanceof Value) {
+
+			return new Value(this.#number / value.#number);
+		}
+		else {
+
+			return this;
+		}
 	}
 
-	this.print = function() {
+	print() {
 
-		console.log(number);
+		console.log(this.#number);
 	}
 }
 
-function ValueError(error) {
+class ValueError {
 
-	this.plus = function() {
+	#message
 
-		return this;
-	};
+	constructor(message) {
 
-	this.divide = function() {
-
-		return this;
+		this.#message = message;
 	}
 
-	this.sumOf = function() {
-
-		return this; 
-	}
-
-	this.quotienOf = function() {
+	add() {
 
 		return this;
 	}
 
-	this.print = function() {
+	divide() {
 
-		console.error(error);
+		return this;
+	}
+
+	print() {
+
+		console.error(this.#message);
 	}
 }
 
@@ -64,9 +72,7 @@ function Data() {
 
 	try {
 
-		let data = getData();
-
-		return new Value(data);
+		return new Value(getData());
 	}
 	catch (error) {
 
@@ -76,7 +82,7 @@ function Data() {
 
 function Addition(left, right) {
 
-	return left.plus(right);
+	return left.add(right);
 }
 
 function Division(left, right) {
